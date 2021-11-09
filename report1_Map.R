@@ -1,15 +1,24 @@
 
 library(icesTAF)
-taf.library(icesFO)
+library(icesFO)
 library(sf)
 library(ggplot2)
 library(dplyr)
 
-mkdir("report")
+
+
+## Run utilies
+source("bootstrap/utilities.r")
 
 # set values for automatic naming of files:
-year_cap = "2020"
-ecoreg = "NrS"
+cap_year <- 2021
+cap_month <- "November"
+ecoreg_code <- "NrS"
+ecoreg <- "NrS"
+
+
+mkdir("report")
+
 
 ##########
 #Load data
@@ -30,6 +39,6 @@ ecoregion <- dplyr::select(ecoregion, -WKT)
 ###############
 
 plot_ecoregion_map(ecoregion, ices_areas)
-ggplot2::ggsave(paste0(year_cap, "_", ecoreg, "_FO_Figure1.png"), path = "report", width = 170, height = 200, units = "mm", dpi = 300)
+ggplot2::ggsave(file_name(cap_year,ecoreg_code,"Figure1", ext = "png"), path = "report", width = 170, height = 200, units = "mm", dpi = 300)
 
 
