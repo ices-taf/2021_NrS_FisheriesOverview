@@ -1,11 +1,18 @@
 
 library(icesTAF)
-taf.library(icesFO)
+library(icesFO)
 library(sf)
 library(ggplot2)
 library(dplyr)
 
+## Run utilies
+source("bootstrap/utilities.r")
 
+# set values for automatic naming of files:
+cap_year <- 2021
+cap_month <- "November"
+ecoreg_code <- "NrS"
+ecoreg <- "NrS"
 ###########
 ##Load data
 ###########
@@ -25,7 +32,7 @@ sar <- dplyr::select(sar, -WKT)
 
 #set range of years in plots
 
-year_range = "2016-2019"
+year_range = "2017-2020"
 
 
 ###########
@@ -36,7 +43,7 @@ year_range = "2016-2019"
 # A. Effort map
 #~~~~~~~~~~~~~~~#
 
-gears <- c("Static", "Midwater", "Otter", "Demersal seine")
+gears <- c("Static", "Midwater", "Otter", "Demersal seine","Dredge", "Beam")
 
 effort <-
     effort %>%
@@ -47,7 +54,9 @@ effort <-
             Static = "Static gears",
             Midwater = "Pelagic trawls and seines",
             Otter = "Bottom otter trawls",
-            `Demersal seine` = "Bottom seines"),
+            `Demersal seine` = "Bottom seines",
+            Dredge = "Dredges",
+            Beam = "Beam trawls"),
           mw_fishinghours = as.numeric(mw_fishinghours)
         ) %>%
       filter(!is.na(mw_fishinghours))
@@ -66,7 +75,7 @@ write_layer(effort, paste0(year_cap, "_", ecoreg,"_FO_VMS_effort"))
 plot_effort_map(effort, ecoregion) +
   ggtitle(paste0("Average MW Fishing hours ", year_range))
 
-ggplot2::ggsave(paste0(year_cap, "_", ecoreg,"_FO_VMS_effort.png"), path = "report", width = 170, height = 200, units = "mm", dpi = 300)
+ggplot2::ggsave(file_name(cap_year,ecoreg_code,"VMS_effort", ext = "png"), path = "report", width = 170, height = 200, units = "mm", dpi = 300)
 
 #~~~~~~~~~~~~~~~#
 # A. Swept area map
@@ -78,10 +87,9 @@ write_layer(sar, paste0(year_cap, "_", ecoreg,"_FO_VMS_sar"))
 plot_sar_map(sar, ecoregion, what = "surface") +
   ggtitle(paste0("Average surface swept area ratio ",year_range))
 
-ggplot2::ggsave(paste0(year_cap, "_", ecoreg,"_FO_VMS_sarA.png"), path = "report", width = 170, height = 200, units = "mm", dpi = 300)
+ggplot2::ggsave(file_name(cap_year,ecoreg_code,"VMS_sarA", ext = "png"), path = "report", width = 170, height = 200, units = "mm", dpi = 300)
 
 plot_sar_map(sar, ecoregion, what = "subsurface")+
   ggtitle(paste0("Average subsurface swept area ratio ",year_range))
 
-ggplot2::ggsave(paste0(year_cap, "_", ecoreg,"_FO_VMS_sarB.png"), path = "report", width = 170, height = 200, units = "mm", dpi = 300)
-
+ggplot2::ggsave(file_name(cap_year,ecoreg_code,"VMS_sarB", ext = "png"), path = "report", width = 170, height = 200, units = "mm", dpi = 300)

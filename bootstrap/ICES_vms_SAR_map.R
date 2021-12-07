@@ -1,7 +1,6 @@
 
-taf.library("icesVMS")
+library("icesVMS")
 
-# icesVMS::update_token("colin")
 vms_sar <- icesVMS::get_sar_map("Greater North Sea")
 
 # convert to sf

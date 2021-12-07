@@ -1,7 +1,7 @@
 # Initial formatting of the data
 
 library(icesTAF)
-taf.library(icesFO)
+library(icesFO)
 library(dplyr)
 
 mkdir("data")
@@ -14,7 +14,7 @@ sid <- read.taf("bootstrap/data/ICES_StockInformation/sid.csv")
 # 1: ICES official catch statistics
 
 hist <- read.taf("bootstrap/data/ICES_nominal_catches/ICES_historical_catches.csv")
-official <- read.taf("bootstrap/data/ICES_nominal_catches/ICES_2006_2018_catches.csv")
+official <- read.taf("bootstrap/data/ICES_nominal_catches/ICES_2006_2019_catches.csv")
 prelim <- read.taf("bootstrap/data/ICES_nominal_catches/ICES_preliminary_catches.csv")
 
 catch_dat <-
@@ -29,9 +29,15 @@ sag_sum <- read.taf("bootstrap/data/SAG_data/SAG_summary.csv")
 sag_refpts <- read.taf("bootstrap/data/SAG_data/SAG_refpts.csv")
 sag_status <- read.taf("bootstrap/data/SAG_data/SAG_status.csv")
 
+<<<<<<< HEAD
 clean_sag <- format_sag(summary, refpts, 2021, "Greater North Sea")
 clean_sag <- unique(clean_sag)
 clean_status <- format_sag_status(status, 2020, "Greater North Sea")
+=======
+clean_sag <- format_sag(sag_sum, sag_refpts, 2021, "Greater North Sea")
+clean_sag <- unique(clean_sag)
+clean_status <- format_sag_status(sag_status, 2021, "Greater North Sea")
+>>>>>>> becf649436a609adb71fbd30c156db050dc615da
 
 
 write.taf(clean_sag, dir = "data")
