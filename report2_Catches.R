@@ -6,7 +6,7 @@ library(ggplot2)
 library(dplyr)
 
 # set values for automatic naming of files:
-year_cap = "2020"
+year_cap = "2021"
 ecoreg = "NrS"
 
 
