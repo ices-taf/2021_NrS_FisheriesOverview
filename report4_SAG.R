@@ -159,6 +159,9 @@ bar_dat <- plot_CLD_bar(catch_current, guild = "pelagic", caption = TRUE, cap_ye
 write.taf(bar_dat, file =file_name(cap_year,ecoreg_code,"SAG_Current_pelagic", ext = "csv"), dir = "report")
 
 catch_current <- unique(catch_current)
+# top_15 <- bar_dat %>% top_n(15, total)
+# bar <- plot_CLD_bar(top_15, guild = "pelagic", caption = TRUE, cap_year , cap_month , return_data = FALSE)
+# kobe <- plot_kobe(top_15, guild = "pelagic", caption = TRUE, cap_year, cap_month , return_data = FALSE)
 kobe <- plot_kobe(catch_current, guild = "pelagic", caption = TRUE, cap_year , cap_month , return_data = FALSE)
 #check this file name
 png(file_name(cap_year,ecoreg_code,"SAG_Current_pelagic", ext = "png"),
@@ -199,7 +202,7 @@ dev.off()
 bar <- plot_CLD_bar(catch_current, guild = "benthic", caption = TRUE, cap_year , cap_month , return_data = FALSE)
 
 bar_dat <- plot_CLD_bar(catch_current, guild = "benthic", caption = TRUE, cap_year , cap_month , return_data = TRUE)
-write.taf(bar_dat, file =file_name(cap_year,ecoreg_code,"SAG_Current_benthic", ext = "png"), dir = "report" )
+write.taf(bar_dat, file =file_name(cap_year,ecoreg_code,"SAG_Current_benthic", ext = "csv"), dir = "report" )
 
 kobe <- plot_kobe(catch_current, guild = "benthic", caption = TRUE, cap_year , cap_month , return_data = FALSE)
 #check this file name
@@ -255,7 +258,7 @@ dat <- plot_discard_current(catch_trends, year, cap_year, cap_month , return_dat
 write.taf(dat, file =file_name(cap_year,ecoreg_code,"SAG_Discards_current", ext = "csv"),dir = "report" )
 
 cowplot::plot_grid(discardsA, discardsB, discardsC, align = "h",nrow = 1, rel_widths = 1, rel_heights = 1)
-ggplot2::ggsave(file_name(cap_year,ecoreg_code,"SAG_Discards_current", ext = "png"),path = "report/", width = 220.32, height = 88.9, units = "mm", dpi = 300)
+ggplot2::ggsave(file_name(cap_year,ecoreg_code,"SAG_Discards", ext = "png"),path = "report/", width = 220.32, height = 88.9, units = "mm", dpi = 300)
 
 
 #~~~~~~~~~~~~~~~#
